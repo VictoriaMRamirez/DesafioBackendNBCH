@@ -1,0 +1,200 @@
+openapi: 3.0.1
+
+info:
+  title: Productos
+  description: API para consulta de productos
+
+  contact:
+    name: Victoria Ramírez
+    url: https://github.com/VictoriaMRamirez
+    email: victoriaramirezdev@gmail.com
+
+  license:
+    name: Repositorio Desafío Backend para NBCH
+    url: https://github.com/VictoriaMRamirez/DesafioBackendNBCH
+
+  version: v1.0.0
+
+
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+
+tags:
+- name: Productos
+  description: API para gestionar productos
+
+paths:
+  /api/v1/productos:
+    get:
+      tags:
+      - Productos
+      description: Retorna la lista de productos
+      operationId: listarProductos
+      responses:
+        "500":
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGenerico'
+        "200":
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+    post:
+      tags:
+      - Productos
+      description: Crear un producto
+      operationId: crearProducto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrearProducto'
+        required: true
+      responses:
+        "500":
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGenerico'
+        "201":
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+
+  /api/v1/productos/{idProducto}:
+    get:
+      tags:
+      - Productos
+      description: Retorna un producto por id
+      operationId: buscarProductoPorId
+      parameters:
+      - name: idProducto
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "500":
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGenerico'
+        "404":
+          description: El producto no existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNoEncontrado'
+        "200":
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+
+  /api/v1/delete/{idProducto}:
+    delete:
+      tags:
+      - Productos
+      description: Eliminar un producto por id
+      operationId: eliminarProductoPorId
+      parameters:
+      - name: idProducto
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "500":
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGenerico'
+        "404":
+          description: El producto no existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNoEncontrado'
+        "204":
+          description: Respuesta exitosa
+          content:
+            application/json: {}
+
+components:
+  schemas:
+    CrearProducto:
+      required:
+      - nombre
+      - precio
+      type: object
+      properties:
+        nombre:
+          maxLength: 100
+          minLength: 0
+          type: string
+        descripcion:
+          maxLength: 5000
+          minLength: 0
+          type: string
+        precio:
+          type: number
+          format: float
+
+    ErrorGenerico:
+      required:
+      - codigo
+      type: object
+      properties:
+        codigo:
+          type: string
+        mensaje:
+          type: string
+
+    Producto:
+      required:
+      - fechaCreacion
+      - idProducto
+      - nombre
+      - precio
+      type: object
+      properties:
+        idProducto:
+          type: integer
+          format: int32
+        nombre:
+          maxLength: 100
+          minLength: 0
+          type: string
+        descripcion:
+          maxLength: 5000
+          minLength: 0
+          type: string
+        precio:
+          type: number
+          format: float
+        fechaCreacion:
+          type: string
+          format: date-time
+
+    ErrorNoEncontrado:
+      required:
+      - codigo
+      type: object
+      properties:
+        codigo:
+          type: string
+        mensaje:
+          type: string
