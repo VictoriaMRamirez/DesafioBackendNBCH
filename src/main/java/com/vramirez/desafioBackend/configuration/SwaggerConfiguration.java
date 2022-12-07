@@ -15,7 +15,7 @@ public class SwaggerConfiguration {
         return new OpenAPI().info(new Info()
                 .title("Productos")
                 .description("API para consulta de productos")
-                .version("V1.0.0")
+                .version("v1.0.0")
                 .contact(new Contact()
                         .name("Victoria Ramírez")
                         .url("https://github.com/VictoriaMRamirez")

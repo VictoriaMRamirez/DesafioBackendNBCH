@@ -1,12 +1,11 @@
 package com.vramirez.desafioBackend.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
-@Schema
+@Builder
 public class ErrorGenerico {
 
     @NotBlank

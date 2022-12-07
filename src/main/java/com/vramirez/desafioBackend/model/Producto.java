@@ -13,14 +13,10 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Schema
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "producto")
-public class Producto /*implements Serializable*/ {
-
-    /*@Serial
-    private static final Integer serialVersionUID = 1;*/
+public class Producto {
 
     @Id
     @NotBlank
@@ -45,8 +41,5 @@ public class Producto /*implements Serializable*/ {
     @CreationTimestamp
     @Column(name = "fecha_creacion", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
-//    @JsonDeserialize(using = StringDeserializer.class)
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime fechaCreacion;
 }
