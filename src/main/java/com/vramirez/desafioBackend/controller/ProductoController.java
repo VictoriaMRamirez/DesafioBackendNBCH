@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +25,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 @Tag(name = "Productos", description = "API para gestionar productos")
+@Log4j2
 public class ProductoController {
 
-    private final static Logger logger = Logger.getLogger(ProductoController.class);
+    private final ProductoService productoService;
 
     @Autowired
-    ProductoService productoService;
+    public ProductoController(ProductoService productoService) {
+        this.productoService = productoService;
+    }
 
     @PostMapping("/productos")
     @Operation(description = "Crear un producto")
@@ -42,18 +45,8 @@ public class ProductoController {
             })
     })
     public ResponseEntity<Producto> crearProducto(@RequestBody CrearProducto crearProducto) throws InternalServerException {
-        Producto producto = null;
-
-        try {
-            producto = productoService.crear(crearProducto);
-
-            logger.info("El producto " + producto.getNombre() + " ID " + producto.getIdProducto() + " ha sido creado");
-            return ResponseEntity.status(HttpStatus.CREATED).body(producto);
-
-        } catch (InternalServerException e) {
-            logger.error("Error en la invocacion de crear productos - " + e.statusText);
-            throw new InternalServerException(e.getStatusCode(), e.message, e.statusText);
-        }
+        Producto producto = productoService.crear(crearProducto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(producto);
     }
 
     @GetMapping("/productos")
@@ -66,18 +59,8 @@ public class ProductoController {
             })
     })
     public ResponseEntity<List<Producto>> listarProductos() throws InternalServerException {
-        List<Producto> productos = null;
-
-        try {
-            productos = productoService.listarTodos();
-
-            logger.info("Existe una lista de productos");
-            return ResponseEntity.status(HttpStatus.OK).body(productos);
-
-        } catch (InternalServerException e) {
-            logger.error("Error en la invocacion de listar productos - " + e.statusText);
-            throw new InternalServerException(e.getStatusCode(), e.message, e.statusText);
-        }
+        List<Producto> productos = productoService.listarTodos();
+        return ResponseEntity.status(HttpStatus.OK).body(productos);
     }
 
     @GetMapping("/productos/{idProducto}")
@@ -92,21 +75,8 @@ public class ProductoController {
             })
     })
     public ResponseEntity<Optional<Producto>> buscarProductoPorId(@PathVariable Integer idProducto) throws ResponseStatusException, InternalServerException {
-        Optional<Producto> producto = null;
-
-        try {
-            producto = productoService.buscarPorId(idProducto);
-            logger.info("Producto ID " + idProducto + "encontrado");
-            return ResponseEntity.status(HttpStatus.OK).body(producto);
-
-        } catch (ResponseStatusException e) {
-            logger.error("Error en la invocacion de buscar producto por ID - " + e.statusText);
-            throw new ResponseStatusException(e.statusCode, e.message, e.statusText);
-
-        } catch (InternalServerException e) {
-            logger.error("Error en la invocacion de buscar producto por ID - " + e.statusText);
-            throw new InternalServerException(e.getStatusCode(), e.message, e.statusText);
-        }
+        Optional<Producto> producto = productoService.buscarPorId(idProducto);
+        return ResponseEntity.status(HttpStatus.OK).body(producto);
     }
 
     @DeleteMapping("/delete/{idProducto}")
@@ -121,19 +91,7 @@ public class ProductoController {
             })
     })
     public ResponseEntity<?> eliminarProductoPorId(@PathVariable Integer idProducto) throws ResponseStatusException, InternalServerException {
-
-        try {
-            productoService.eliminarPorId(idProducto);
-            logger.info("Producto con ID " + idProducto + " eliminado");
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Producto con ID " + idProducto + " eliminado");
-
-        } catch (ResponseStatusException e) {
-            logger.error("Error en la invocacion de buscar producto por ID - " + e.statusText);
-            throw new ResponseStatusException(e.statusCode, e.message, e.statusText);
-
-        } catch (InternalServerException e) {
-            logger.error("Error en la invocacion de buscar producto por ID - " + e.statusText);
-            throw new InternalServerException(e.getStatusCode(), e.message, e.statusText);
-        }
+        productoService.eliminarPorId(idProducto);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Producto con ID " + idProducto + " eliminado");
     }
 }
