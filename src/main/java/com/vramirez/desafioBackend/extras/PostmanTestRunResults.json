@@ -1,0 +1,297 @@
+{
+	"id": "f6402569-0b92-4336-9e4d-d2a9240c4c22",
+	"name": "Desafio Backend NBCH",
+	"timestamp": "2022-12-12T01:37:38.452Z",
+	"collection_id": "20469196-26a1e8a2-a910-4308-b55a-298f7e2d0721",
+	"folder_id": 0,
+	"environment_id": "20469196-d853e5ae-4c34-428f-8e74-674166670ff3",
+	"totalPass": 9,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "347361a1-740d-42c0-9e6b-412e75cc93e6",
+			"name": "Crear producto c/todo",
+			"url": "http://localhost:8090/api/v1/productos",
+			"time": 501,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code 201": true
+			},
+			"testPassFailCounts": {
+				"Status code 201": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				501
+			],
+			"allTests": [
+				{
+					"Status code 201": true
+				}
+			]
+		},
+		{
+			"id": "76283745-b08a-4d8a-8b65-7ef01ecced0c",
+			"name": "Crear producto s/nombre",
+			"url": "http://localhost:8090/api/v1/productos",
+			"time": 25,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code 500": true
+			},
+			"testPassFailCounts": {
+				"Status code 500": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Status code 500": true
+				}
+			]
+		},
+		{
+			"id": "486854f1-a8f0-48f6-99a4-c8179997140a",
+			"name": "Crear producto s/descripcion",
+			"url": "http://localhost:8090/api/v1/productos",
+			"time": 39,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code 201": true
+			},
+			"testPassFailCounts": {
+				"Status code 201": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				39
+			],
+			"allTests": [
+				{
+					"Status code 201": true
+				}
+			]
+		},
+		{
+			"id": "e11c0fcd-0591-4468-bc2e-488db4f22f61",
+			"name": "Crear producto s/precio",
+			"url": "http://localhost:8090/api/v1/productos",
+			"time": 11,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code 500": true
+			},
+			"testPassFailCounts": {
+				"Status code 500": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code 500": true
+				}
+			]
+		},
+		{
+			"id": "431efb78-857c-48b5-b42c-121e43f4af10",
+			"name": "Listar productos",
+			"url": "http://localhost:8090/api/v1/productos",
+			"time": 161,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code 200": true
+			},
+			"testPassFailCounts": {
+				"Status code 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				161
+			],
+			"allTests": [
+				{
+					"Status code 200": true
+				}
+			]
+		},
+		{
+			"id": "9964d51d-bb8d-4305-9646-34c8461adf30",
+			"name": "Buscar producto x id correcto",
+			"url": "http://localhost:8090/api/v1/productos/1",
+			"time": 59,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code 200": true
+			},
+			"testPassFailCounts": {
+				"Status code 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				59
+			],
+			"allTests": [
+				{
+					"Status code 200": true
+				}
+			]
+		},
+		{
+			"id": "6785eaf8-016f-47bf-a337-c57ff3e07a85",
+			"name": "Buscar producto x id incorrecto",
+			"url": "http://localhost:8090/api/v1/productos/3",
+			"time": 20,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code 404": true
+			},
+			"testPassFailCounts": {
+				"Status code 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Status code 404": true
+				}
+			]
+		},
+		{
+			"id": "e3bb369c-56cd-4948-b8c7-79dfe107127b",
+			"name": "Eliminar producto x id correcto",
+			"url": "http://localhost:8090/api/v1/delete/1",
+			"time": 39,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code 204": true
+			},
+			"testPassFailCounts": {
+				"Status code 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				39
+			],
+			"allTests": [
+				{
+					"Status code 204": true
+				}
+			]
+		},
+		{
+			"id": "7afc970b-dcc2-49b2-9524-2a331bd9cfa0",
+			"name": "Eliminar producto x id incorrecto",
+			"url": "http://localhost:8090/api/v1/delete/3",
+			"time": 18,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code 404": true
+			},
+			"testPassFailCounts": {
+				"Status code 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code 404": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 873,
+	"collection": {
+		"requests": [
+			{
+				"id": "347361a1-740d-42c0-9e6b-412e75cc93e6",
+				"method": "POST"
+			},
+			{
+				"id": "76283745-b08a-4d8a-8b65-7ef01ecced0c",
+				"method": "POST"
+			},
+			{
+				"id": "486854f1-a8f0-48f6-99a4-c8179997140a",
+				"method": "POST"
+			},
+			{
+				"id": "e11c0fcd-0591-4468-bc2e-488db4f22f61",
+				"method": "POST"
+			},
+			{
+				"id": "431efb78-857c-48b5-b42c-121e43f4af10",
+				"method": "GET"
+			},
+			{
+				"id": "9964d51d-bb8d-4305-9646-34c8461adf30",
+				"method": "GET"
+			},
+			{
+				"id": "6785eaf8-016f-47bf-a337-c57ff3e07a85",
+				"method": "GET"
+			},
+			{
+				"id": "e3bb369c-56cd-4948-b8c7-79dfe107127b",
+				"method": "DELETE"
+			},
+			{
+				"id": "7afc970b-dcc2-49b2-9524-2a331bd9cfa0",
+				"method": "DELETE"
+			}
+		]
+	}
+}
